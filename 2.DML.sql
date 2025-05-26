@@ -21,6 +21,9 @@ select * from author where id=1;    -- where 뒤에 조회조건을 통해 filte
 select * from author where name='hong1';    -- 이름 조회
 select * from author where id>3;    -- id가 4번 이상인 id 조회
 select * from author where id>2 and name='hong4'; -- id가 2 이상이면서 name이 hong4 조회
+select * from author where id in (1,3,5);
+select * from post where author_id in (select id from author where name='hong');
+
 
 -- 중복제거 조회 : distinct
 select name from author;
