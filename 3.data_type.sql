@@ -1,7 +1,7 @@
 -- tinyint : -128 ~ 127 까지 표현
 -- author 테이블에 age 컬럼 변경
 alter table author modify column age tinyint unsigned;
-insert into author(id, email, age) values(6, 'abc@naver.com', 300); -- 300은 255범위를 벗어나기 때문에 에러, 200으로 수정
+ into author(id, email, age) values(6, 'abc@naver.com', 300); -- 300은 255범위를 벗어나기 때문에 에러, 200으로 수정
 
 
 -- int : 4바이트(대략, 40억 범위) -2147483648 ~ 2147483647

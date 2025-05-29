@@ -35,7 +35,7 @@ show create table 테이블명;
 
 -- Ex> posts 테이블 신규 생성(id, title, contents, author_id) 
 -- + 다른 방법으로 키 지정 : primary key(id), foreign key(author_id)
--- 외래키와 연결할 테이블(컬럼) 지정 : references 테이블명(컬럼)
+-- 와 연결할 테이블(컬럼) 지정 : references 테이블명(컬럼)
 create table posts(id int, title varchar(255), contents varchar(255), author_id int not null, primary key(id), foreign key(author_id) references author(id));
 
 -- 테이블 제약조건 조회
