@@ -1,6 +1,6 @@
---  : 테이블에 데이터 삽입
- into 테이블명(컬럼1, 컬럼2, 컬럼3) values(데이터1, 데이터2, 데이터3);
- into author(id, name, email) values(3, 'hong3', 'hong3@naver.com'); -- 문자열
+-- insert : 테이블에 데이터 삽입
+insert into 테이블명(컬럼1, 컬럼2, 컬럼3) values(데이터1, 데이터2, 데이터3);
+insert into author(id, name, email) values(3, 'hong3', 'hong3@naver.com'); -- 문자열
 -- update : 테이블에 데이터 변경
 update author set name="홍길동", email="hong100@naver.com" where id=3;
 
@@ -15,7 +15,7 @@ delete from author where id=3;
 
 -- select 조건절 활용 조회
 -- 테스트 데이터 삽입
---  문을 활용하여 author 데이터 3개, post 데이터 5개 추가
+-- insert 문을 활용하여 author 데이터 3개, post 데이터 5개 추가
 select * from author;   -- 어떤 조회조건 없이 모든 컬럼 조회
 select * from author where id=1;    -- where 뒤에 조회조건을 통해 filtering
 select * from author where name='hong1';    -- 이름 조회
