@@ -105,3 +105,39 @@ sadd posting:likes:1 a1@naver.com   # set 자료구조 : 좋아요 기록 추가
 smembers posting:likes:1   # set 조회 : 좋아요 조회
 
 # zset : sorted set
+# zset을 활용해서 최근 시간순으로 정렬 가능
+# 중복은 마지막 값이 남아있어서 최신 데이터 관리 유용
+# zset도 set이므로 같은 상품을 add할 경우에 중복이 제거되고, score(시간)값만 업데이트
+zadd user:1:recent:product 091330 mango
+zadd user:1:recent:product 091331 apple     # 중복값으로 덮어쓰기 됨
+zadd user:1:recent:product 091332 banana
+zadd user:1:recent:product 091333 orange
+zadd user:1:recent:product 091334 apple
+
+# zset 조회 : zrange(score 기준 오름차순), zrevrange(score 기준 내림차순)
+zrange user:1:recent:product 0 2    # 0부터 2번째까지 조회회(mango, banana, orange)
+zrange user:1:recent:product -3 -1  # 최근 추가된 상품 3개 조회(banana, orange, apple)
+zrevrange user:1:recent:product 0 2 # 내림차순 정렬(= order by desc) (apple, orange, banana)
+# withscores를 통해 score값까지 같이 출력
+zrevrange user:1:recent:product 0 2 withscores
+
+# 주식 시세 저장
+# 종목: 삼성전자, 시세: 55000원, 시간: 현재시간(유닉스타임스탬프0) -> 년원일 시간을 초단위로 변환한 것
+zadd stock:price:se 1748911160 "55000"
+zadd stock:price:lg 1748911160 "100000"
+zadd stock:price:se 1748911161 "55500"
+zadd stock:price:lg 1748911162 "110000"
+# 삼성전자의 현재 시세
+zrange stock:price:lg -1 -1     # 110000
+zrevrange stock:price:lg 0 0    # 110000
+
+# hashes : value가 map 형태의 자료구조 (key:value, key:value, ... 형태의 자료구조)
+set member:info:1 "{\"name\":\"hong\", \"email\":\"hong@daum.net\", \"age\":30}"
+hset member:info:1 name hong email hong@daum.net age 30
+# 특정값 조회
+hget member:info:1 name
+# 모든 객체값 조회
+hgetall member:info:1
+# 특정 요소값 수정
+hset member:info:1 name hong2
+# redis 활용 상황 : 빈번하게 변경되는 객체값을 저장시 효율적
